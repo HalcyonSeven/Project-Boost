@@ -5,13 +5,15 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private Rigidbody rocketRb;
-    [SerializeField] private float thrust =1000f;
+    private AudioSource audioSource;
+    [SerializeField] private float thrust = 1000f;
     [SerializeField] private float rotationSpeed = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
         rocketRb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,13 +22,22 @@ public class Movement : MonoBehaviour
         ProcessThrust();
         ProcessRotation();
     }
+    // applies thrust when player presses A or D
     void ProcessThrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
             rocketRb.AddRelativeForce(Vector3.up * thrust * Time.deltaTime);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
-
+        else
+        {
+            audioSource.Stop();
+        }
+    // applies rotation when player presses A or D
     }
     void ProcessRotation()
     {
@@ -47,4 +58,3 @@ public class Movement : MonoBehaviour
         rocketRb.freezeRotation = false;
     }
 }
-
