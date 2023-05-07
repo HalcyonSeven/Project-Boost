@@ -50,7 +50,6 @@ public class Movement : MonoBehaviour
             ApplyRotation(-rotationSpeed);
         }
     }
-
     void ApplyRotation(float rotationThisFrame)
     {
         rocketRb.freezeRotation = true;
