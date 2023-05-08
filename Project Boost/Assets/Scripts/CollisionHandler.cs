@@ -42,7 +42,7 @@ public class CollisionHandler : MonoBehaviour
         isGameTransitioning = true;
         audioSource.Stop();
         audioSource.PlayOneShot(crashSound);
-        GetComponent<ParticleSystem>().Play(crashParticle);
+        crashParticle.Play();
         GetComponent<Movement>().enabled = false;
         StartCoroutine(ReloadScene());
     }
@@ -51,7 +51,7 @@ public class CollisionHandler : MonoBehaviour
         isGameTransitioning = true;
         audioSource.Stop();
         audioSource.PlayOneShot(successSound);
-        GetComponent<ParticleSystem>().Play(successParticle);
+        successParticle.Play();
         GetComponent<Movement>().enabled = false;
         StartCoroutine(LoadNextLevel());
     }
