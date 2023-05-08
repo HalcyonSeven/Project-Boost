@@ -23,11 +23,21 @@ public class Oscillator : MonoBehaviour
 
     private void GenerateOscillation()
     {
+        // smallest point floating point value, 
+        // used instead of zero to compare two floats
+        if (period <= Mathf.Epsilon)
+        {
+            return;
+        }
+        // increasing with time
         float cycles = Time.time / period;
+        // tau is a constant = 2PI rads
         const float tau = Mathf.PI * 2;
+        // generates sin wave range  -1 to 1
         float rawSinWave = Mathf.Sin(cycles * tau);
-
+        // recalculated to 0 to 1
         movementFactor = (rawSinWave + 1f) / 2f;
+
         Vector3 offset = movementVector * movementFactor;
         transform.position = startingPos + offset;
     }
